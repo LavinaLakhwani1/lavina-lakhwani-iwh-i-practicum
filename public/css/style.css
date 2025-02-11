@@ -10,6 +10,26 @@ h1 {
     margin: 1rem;
 }
 
+a {
+    margin: 1rem;
+}
+
+table {
+    margin: 1rem;
+}
+
+form {
+    margin: 1rem;
+}
+
+label {
+    margin: 1rem;
+}
+
+button {
+    margin: 1rem;
+}
+
 .cards {
     display: flex;
     align-items: center;
@@ -48,6 +68,7 @@ label, input {
 
 input[type="text"] {
     padding: .25rem;
+    margin: 1rem;
 }
 
 input[type="submit"] {

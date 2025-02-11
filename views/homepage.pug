@@ -1,0 +1,21 @@
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Favorite Anime
+        a(href="/update-cobj") Add/Update this table
+        br
+        table(border="1")
+            thead
+                tr
+                    th Name
+                    th Favorite Character
+                    th Description
+            //- tbody
+            //-     each anime in data
+            //-         tr
+            //-             td= anime.properties.name
+            //-             td= anime.properties.favorite_character
+            //-             td= anime.properties.description
