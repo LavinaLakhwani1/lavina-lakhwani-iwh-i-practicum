@@ -1,12 +1,29 @@
-html 
-    head 
-        title= `${title}`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body    
-        h1 Add Favorite Anime
-        a(href="/") Return to the Homepage
-        form(action="/update-cobj" method="POST")
-        label(for="updateText") Enter Update:
-        input(type="text" name="updateText" required)
-        button(type="submit") Add
+html
+  head 
+    title= `${title}`
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body    
+    h1 Add Favorite Anime
+    a(href="/") Return to the Homepage
+    form(action="/update-cobj", method="POST")
+      table
+        tbody
+          tr
+            td
+              label(for="name") Name:
+                span.required *
+            td
+              input(type="text", name="name", required, class="rounded-input")
+          tr
+            td
+              label(for="favorite_character") Favorite Character:
+                span.required *
+            td
+              input(type="text", name="favorite_character", required, class="rounded-input")
+          tr
+            td
+              label(for="description") Description:
+            td
+              textarea(name="description", id="description", class="rounded-input")
+      button(type="submit", class="rounded-button") Add

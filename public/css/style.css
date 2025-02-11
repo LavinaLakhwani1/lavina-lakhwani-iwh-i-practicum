@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
+body,
+* {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -60,7 +61,7 @@ button {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
+label {
     margin-top: 5px;
     display: block;
     font-size: inherit;
@@ -71,9 +72,56 @@ input[type="text"] {
     margin: 1rem;
 }
 
+textarea {
+    padding: .25rem;
+    margin: 1rem;
+}
+
 input[type="submit"] {
     background-color: lightgrey;
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+}
+
+.rounded-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.rounded-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.rounded-button:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.rounded-input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rounded-input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+.required {
+    color: red;
+    margin-left: 4px;
+    font-weight: bold;
 }
