@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const app = express();
 const axiosHelper = require('./axios');
 require('dotenv').config();
@@ -18,7 +17,7 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 app.get('/', async (req, res) => {
     try {
         //call API
-        const data = await axiosHelper.getCustomObject('2-38355921', 100, 'name,favorite_character,description', PRIVATE_APP_ACCESS);
+        const data = await axiosHelper.getCustomObject('2-38355921', 100, 'name,favorite_character,description,hs_object_id', PRIVATE_APP_ACCESS);
         res.render('homepage', { title: 'Favorite Anime | Integrating With HubSpot I Practicum', data: data?.results || [] });
     } catch (error) {
         console.error(error);
@@ -27,9 +26,13 @@ app.get('/', async (req, res) => {
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
-app.get('/update-cobj', async (req, res) => {
+app.get('/update-cobj/:id?', async (req, res) => {
     try {
-        res.render('updates', { title: 'Update Favorite Anime Form | Integrating With HubSpot I Practicum' });
+        let data = null;
+        if(req.params?.id){
+            data = await axiosHelper.getCustomObjectById('2-38355921', req.params.id, 'name,favorite_character,description,hs_object_id', PRIVATE_APP_ACCESS);
+        }
+        res.render('updates', { title: 'Update Favorite Anime Form | Integrating With HubSpot I Practicum', data: data });
     } catch (error) {
         console.error(error);
     }
@@ -39,10 +42,14 @@ app.get('/update-cobj', async (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post('/update-cobj', async (req, res) => {
+app.post('/update-cobj/:id?', async (req, res) => {
     try {
         //call API
-        await axiosHelper.addCustomObject('2-38355921', req.body, PRIVATE_APP_ACCESS);
+        if(req.params?.id){
+            await axiosHelper.updateCustomObject('2-38355921', req.params.id, req.body, PRIVATE_APP_ACCESS);
+        }else{
+            await axiosHelper.addCustomObject('2-38355921', req.body, PRIVATE_APP_ACCESS);
+        }
         res.redirect('/');
         // res.render('homepage', { title: 'Favorite Anime | Integrating With HubSpot I Practicum', data });
     } catch (error) {
@@ -50,10 +57,25 @@ app.post('/update-cobj', async (req, res) => {
     }
 });
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
+// TODO: ROUTE 4 - Create a new app.get route for the custom objects to delete your custom object data. Once executed, redirect the user to the homepage.
 
-* * App.get sample
+// * Code for Route 4 goes here
+app.get('/delete-cobj/:id', async (req, res) => {
+    try {
+        //call API
+        if(req.params?.id){
+            await axiosHelper.deleteCustomObject('2-38355921', req.params.id, PRIVATE_APP_ACCESS);
+        }
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+/** 
+  This is sample code to give you a reference for how you should structure your calls. 
+
+  App.get sample
 app.get('/contacts', async (req, res) => {
     const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
     const headers = {
@@ -69,7 +91,7 @@ app.get('/contacts', async (req, res) => {
     }
 });
 
-* * App.post sample
+  App.post sample
 app.post('/update', async (req, res) => {
     const update = {
         properties: {

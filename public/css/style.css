@@ -11,16 +11,12 @@ h1 {
     margin: 1rem;
 }
 
-a {
-    margin: 1rem;
-}
-
 table {
     margin: 1rem;
 }
 
-form {
-    margin: 1rem;
+div {
+    padding: 5px;
 }
 
 label {
@@ -124,4 +120,8 @@ input[type="submit"] {
     color: red;
     margin-left: 4px;
     font-weight: bold;
+}
+
+.link {
+    margin: 1rem;
 }
